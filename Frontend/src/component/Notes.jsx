@@ -7,17 +7,73 @@ import { useNavigate } from "react-router-dom"
 function Notes() {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
+    // const[error,setError]=useState(false)
+    // const[titleError,setTitleError] = useState("")
+    // const[contentError,setContentError] = useState("")
     const baseUrl = "http://localhost:3001/create_note"
     const nagvigate=useNavigate()
+
+
+// const checkError = () =>{
+//     console.log(title.length==0);
+//     if(title.length==0){
+//         console.log("fffff");
+//         setTitleError("Title is required")
+//        setError(true);
+    
+//     }
+//     if(content.length==0){
+//         setContentError("Content is required")
+//        setError(true);
+//     }
+    
+//     if(title.length!=0 || content?.length!=0){
+//         setError(false);
+//         setTitleError("")
+//         setContentError("")
+//         return 
+        
+//     }
+//     return false;
+// }
+
+// const checkError = () =>{
+//     if(!title?.length){
+      
+//         setTitleError("Title is required")
+//        setError(true);
+    
+//     }
+//     if(!content?.length){
+//         setContentError("Content is required")
+//        setError(true);
+//     }
+//     if(title?.length && content?.length){
+//         setError(false);
+//         setTitleError("")
+//         setContentError("")
+//         return false
+//     }
+//     else
+//     return true
+// }
+
+console.log(title.length,"jjjjj");
+
+
+
     const formHandler = async (e) => {
         e.preventDefault()
-        const userData = {
-            title: title,
-            content: content
-        };
+        // const hasError = checkError();
+
+      
+            const userData = {
+                title: title,
+                content: content
+            };
+        
         await axios.post(baseUrl, userData)
             .then(response => {
-                console.log('Registration successful:', response.data);
                 if (response?.data?.status_code == 1) {
                     SwalClass.success(response?.data?.message)
                     setTitle("")
@@ -32,6 +88,7 @@ function Notes() {
             .catch(error => {
                 console.error('notes create failed:', error);
             });
+        
 
     }
 
@@ -42,13 +99,13 @@ function Notes() {
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Title:</label>
                     <input type="text" placeholder="title...." className="form-control" id="exampleInputEmail1" value={title} onChange={(e) => setTitle(e.target.value)} />
-
+                 {/* {error && title?.length ==0 ?<span className="text-danger">{titleError}</span>:""} */}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleInputPassword1" className="form-label">content:</label>
                     <textarea type="text" placeholder="content..." className="form-control" id="exampleInputPassword1" value={content} onChange={(e) => setContent(e.target.value)} />
+                   {/* {error && content?.length ==0 ?<span className="text-danger">{contentError}</span>:""} */}
                 </div>
-
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </div>

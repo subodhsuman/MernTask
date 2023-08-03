@@ -87,6 +87,7 @@ function AllNotes() {
     }, [])
     return (
         <div>
+             <h3>All Notes::</h3>
             <button type="button" onClick={() => navigate("/notes")} className="btn btn-secondary">Add Notes</button>
             <table className="table">
                 <thead>
@@ -98,7 +99,8 @@ function AllNotes() {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.map((v, i) => {
+                    {data?.length !=0 ?
+                      data?.map((v, i) => {
                         return (
                             <>
                                 <tr>
@@ -112,7 +114,9 @@ function AllNotes() {
 
                         )
 
-                    })}
+                    }): <div >
+                           <p className="text-danger">No Notes found</p>
+                        </div>}
                 </tbody>
             </table>
             {/* Edit Model is here */}
