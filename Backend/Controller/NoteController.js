@@ -16,7 +16,8 @@ const createNotes = async (req, res) => {
 }
 const get_Notes = async (req, res) => {
     try {
-        const get_notes = await Note.find()
+        const get_notes = await Note.find().sort({title: -1 });
+
         return res.json(Reply.success("Notes fetched", get_notes))
 
     } catch (errors) {
