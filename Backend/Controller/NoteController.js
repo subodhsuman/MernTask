@@ -1,10 +1,22 @@
 import Note from "../model/NoteModel.js";
 import Reply from "../common/Reply.js";
+import  Validator from 'validatorjs';
 const createNotes = async (req, res) => {
     const request = req.body;
-    if (!request?.title || !request.content) {
-        return res.json(Reply.failed("Note content can not be empty"))
-    }
+    let rules = {
+        title:'required|string',
+        content:'required|string',   
+      };
+
+      const validation=new Validator(request,rules);
+      
+      if(validation.fails()){
+        let showErr=Object.keys(Object.entries(validation.errors)[0][1])
+        console.log(showErr,"ffffff");
+         return res.json(Reply.failed(validation.errors.first(showErr)))
+         
+      }
+ 
     try {
         const note = await Note.create(request)
         return res.json(Reply.success("Note created", note))

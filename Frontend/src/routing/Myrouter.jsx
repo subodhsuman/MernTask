@@ -1,6 +1,7 @@
 import { Routes, Route} from "react-router-dom";
 import AllNotes  from "../component/AllNotes.jsx";
 import Notes from "../component/Notes.jsx";
+import AllData from "../component/AllData.jsx";
 
 const  Router = ()=> {
   const routes = [
@@ -14,7 +15,11 @@ const  Router = ()=> {
       path: "/notes",
       Component:Notes 
     },
-   
+    {
+      name: "alldata",
+      path: "/alldata",
+      Component:AllData 
+    },
     
   ];
 
